@@ -1,8 +1,8 @@
 /*
  * Name: Frank Solomon
- * Date: 10/10/2026
- * Assignment: SDC330L Week 1 Project
- * Purpose: Represents a family contact and their family relationship.
+ * Date: 10/24/2026
+ * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Description: A contact with a family relationship.
  */
 
 // INHERITANCE: FamilyContact extends the Contact parent class.
@@ -13,7 +13,7 @@ public class FamilyContact extends Contact {
                          String phone, String email, Address address,
                          String relationship) {
         super(firstName, lastName, phone, email, address);
-        this.relationship = relationship;
+        this.relationship = requireText(relationship, "relationship");
     }
 
     public String getRelationship() {
@@ -21,7 +21,7 @@ public class FamilyContact extends Contact {
     }
 
     public void setRelationship(String relationship) {
-        this.relationship = relationship;
+        this.relationship = requireText(relationship, "relationship");
     }
 
     @Override

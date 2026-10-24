@@ -1,13 +1,12 @@
 /*
  * Name: Frank Solomon
- * Date: 10/17/2026
- * Assignment: SDC330L Week 1 Project
- * Purpose: Stores shared contact information and serves as the
- * parent class for business, family, and friend contacts.
+ * Date: 10/24/2026
+ * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Description: Abstract parent with shared contact data and display behavior.
  */
 
-// INTERFACE IMPLEMENTATION: Contact provides the Displayable method.
-public class Contact implements Displayable {
+public abstract class Contact implements Displayable {
+    private int id;
     private String firstName;
     private String lastName;
     private String phone;
@@ -16,13 +15,13 @@ public class Contact implements Displayable {
     // COMPOSITION: A Contact has an Address object.
     private Address address;
 
-    public Contact(String firstName, String lastName,
+    protected Contact(String firstName, String lastName,
                    String phone, String email, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.firstName = requireText(firstName, "firstName");
+        this.lastName = requireText(lastName, "lastName");
+        this.phone = requireText(phone, "phone");
+        this.email = requireText(email, "email");
+        this.address = java.util.Objects.requireNonNull(address, "Address is required.");
     }
 
     public String getFirstName() {
@@ -30,7 +29,7 @@ public class Contact implements Displayable {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = requireText(firstName, "firstName");
     }
 
     public String getLastName() {
@@ -38,7 +37,7 @@ public class Contact implements Displayable {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = requireText(lastName, "lastName");
     }
 
     public String getPhone() {
@@ -46,7 +45,7 @@ public class Contact implements Displayable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = requireText(phone, "phone");
     }
 
     public String getEmail() {
@@ -54,7 +53,7 @@ public class Contact implements Displayable {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = requireText(email, "email");
     }
 
     public Address getAddress() {
@@ -62,17 +61,27 @@ public class Contact implements Displayable {
     }
 
     public void setAddress(Address address) {
-        this.address = address;
+        this.address = java.util.Objects.requireNonNull(address, "Address is required.");
     }
 
-    public String getContactType() {
-        return "General";
+    public abstract String getContactType();
+
+    public int getId() {
+        return id;
     }
 
-    // Implements Displayable; subclasses override this with their own details.
+    // Package access: only application classes assign an ID, and only once.
+    void assignId(int id) {
+        if (this.id != 0 || id <= 0) {
+            throw new IllegalArgumentException("ID must be positive and assigned only once.");
+        }
+        this.id = id;
+    }
+
+    // Returns the information shared by every contact type.
     @Override
-public String getContactInformation() {
-        return "Type: " + getContactType()
+    public String getContactInformation() {
+        return "ID: " + id + "\nType: " + getContactType()
                 + "\nName: " + firstName + " " + lastName
                 + "\nPhone: " + phone
                 + "\nEmail: " + email
@@ -82,5 +91,12 @@ public String getContactInformation() {
     @Override
     public String toString() {
         return getContactInformation();
+    }
+    // Keep required data valid even when callers bypass the console.
+    protected static String requireText(String value, String field) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(field + " is required.");
+        }
+        return value.trim();
     }
 }

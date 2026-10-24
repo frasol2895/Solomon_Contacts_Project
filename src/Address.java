@@ -1,9 +1,8 @@
 /*
  * Name: Frank Solomon
- * Date: 10/10/2026
- * Assignment: SDC330L Week 1 Project
- * Purpose: Stores a contact's street, city, state, and ZIP code.
- * A Contact will contain an Address object to demonstrate composition.
+ * Date: 10/24/2026
+ * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Description: Stores and formats the address owned by a contact.
  */
 
 public class Address {
@@ -15,10 +14,10 @@ public class Address {
     // Constructor initializes the address information.
     public Address(String street, String city, String state,
                    String zipCode) {
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
+        this.street = requireText(street, "street");
+        this.city = requireText(city, "city");
+        this.state = requireText(state, "state");
+        this.zipCode = requireText(zipCode, "zipCode");
     }
 
     public String getStreet() {
@@ -26,7 +25,7 @@ public class Address {
     }
 
     public void setStreet(String street) {
-        this.street = street;
+        this.street = requireText(street, "street");
     }
 
     public String getCity() {
@@ -34,7 +33,7 @@ public class Address {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = requireText(city, "city");
     }
 
     public String getState() {
@@ -42,7 +41,7 @@ public class Address {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = requireText(state, "state");
     }
 
     public String getZipCode() {
@@ -50,12 +49,19 @@ public class Address {
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+        this.zipCode = requireText(zipCode, "zipCode");
     }
 
     // Returns a readable mailing address.
     @Override
     public String toString() {
         return street + ", " + city + ", " + state + " " + zipCode;
+    }
+    // Keep required data valid even when callers bypass the console.
+    private static String requireText(String value, String field) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(field + " is required.");
+        }
+        return value.trim();
     }
 }

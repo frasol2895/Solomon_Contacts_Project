@@ -1,8 +1,8 @@
 /*
  * Name: Frank Solomon
- * Date: 10/10/2026
- * Assignment: SDC330L Week 1 Project
- * Purpose: Represents a friend contact and records where we met.
+ * Date: 10/24/2026
+ * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Description: A contact with a description of where we met.
  */
 
 // INHERITANCE: FriendContact extends the Contact parent class.
@@ -13,7 +13,7 @@ public class FriendContact extends Contact {
                          String phone, String email, Address address,
                          String whereWeMet) {
         super(firstName, lastName, phone, email, address);
-        this.whereWeMet = whereWeMet;
+        this.whereWeMet = requireText(whereWeMet, "whereWeMet");
     }
 
     public String getWhereWeMet() {
@@ -21,7 +21,7 @@ public class FriendContact extends Contact {
     }
 
     public void setWhereWeMet(String whereWeMet) {
-        this.whereWeMet = whereWeMet;
+        this.whereWeMet = requireText(whereWeMet, "whereWeMet");
     }
 
     @Override

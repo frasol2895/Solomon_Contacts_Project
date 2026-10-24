@@ -1,8 +1,8 @@
 /*
  * Name: Frank Solomon
- * Date: 10/10/2026
- * Assignment: SDC330L Week 1 Project
- * Purpose: Represents a business contact with a company and job title.
+ * Date: 10/24/2026
+ * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Description: A contact with a company and job title.
  */
 
 // INHERITANCE: BusinessContact extends the Contact parent class.
@@ -14,8 +14,8 @@ public class BusinessContact extends Contact {
                            String phone, String email, Address address,
                            String company, String jobTitle) {
         super(firstName, lastName, phone, email, address);
-        this.company = company;
-        this.jobTitle = jobTitle;
+        this.company = requireText(company, "company");
+        this.jobTitle = requireText(jobTitle, "jobTitle");
     }
 
     public String getCompany() {
@@ -23,7 +23,7 @@ public class BusinessContact extends Contact {
     }
 
     public void setCompany(String company) {
-        this.company = company;
+        this.company = requireText(company, "company");
     }
 
     public String getJobTitle() {
@@ -31,7 +31,7 @@ public class BusinessContact extends Contact {
     }
 
     public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
+        this.jobTitle = requireText(jobTitle, "jobTitle");
     }
 
     @Override

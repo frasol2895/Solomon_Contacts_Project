@@ -1,12 +1,10 @@
 /*
  * Name: Frank Solomon
- * Date: 10/17/2026
- * Assignment: SDC330L Week 2 Project
- * Purpose: Defines a shared contract for obtaining contact
- * information that can be displayed in the console.
+ * Date: 10/24/2026
+ * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Description: Defines the shared contact display contract.
  */
 
-// INTERFACE: Implementing classes must provide this method.
 public interface Displayable {
     String getContactInformation();
 }
