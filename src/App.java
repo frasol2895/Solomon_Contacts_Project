@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
  * Date: 10/24/2026
- * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
  * Description: Runs the terminal menu and validates contact management input.
  */
 
@@ -20,8 +20,8 @@ public class App {
     public static void main(String[] args) {
         createSampleContacts();
         System.out.println("Frank Solomon - Week 3 Contacts Application");
-        System.out.println("Class Implementation - Abstraction and Contact Management");
-        System.out.println("Three fictional samples are loaded. Changes last only this session.");
+        System.out.println("Project Week 3 - Abstraction, Constructors, and Access Specifiers");
+        System.out.println("Welcome! Three fictional samples are loaded. Changes last only this session.");
         System.out.println("Enter a menu number. Type /cancel during an operation to cancel.");
         try (Scanner input = new Scanner(System.in)) {
             boolean running = true;
@@ -64,6 +64,7 @@ public class App {
         System.out.println("Thank you for using the Contacts application. Goodbye!");
     }
 
+    // PRIVATE: menu helpers are implementation details used only inside App.
     private static void displayMenu() {
         System.out.println("\n========== MAIN MENU ==========");
         System.out.println("1. Display all contacts");
@@ -202,7 +203,7 @@ public class App {
                 new Address("240 Maple Lane", "Chesterfield", "VA", "23832");
 
         Address friendAddress =
-                new Address("85 Oak Drive", "Midlothian", "VA", "23113");
+                new Address(new Address("85 Oak Drive", "Midlothian", "VA", "23113"));
 
         // INHERITANCE: These three classes extend Contact.
         BusinessContact business = new BusinessContact(
@@ -218,7 +219,8 @@ public class App {
         FriendContact friend = new FriendContact(
                 "Taylor", "Bennett",
                 "804-555-0103", "taylor.bennett@example.com",
-                friendAddress, "College");
+                friendAddress);
+        friend.setWhereWeMet("College");
 
         manager.addContact(business);
         manager.addContact(family);

@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
  * Date: 10/24/2026
- * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
  * Description: Stores and formats the address owned by a contact.
  */
 
@@ -18,6 +18,11 @@ public class Address {
         this.city = requireText(city, "city");
         this.state = requireText(state, "state");
         this.zipCode = requireText(zipCode, "zipCode");
+    }
+
+    // OVERLOADED COPY CONSTRUCTOR: independent address data for a new owner.
+    public Address(Address source) {
+        this(source.getStreet(), source.getCity(), source.getState(), source.getZipCode());
     }
 
     public String getStreet() {

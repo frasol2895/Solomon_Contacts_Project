@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
  * Date: 10/24/2026
- * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
  * Description: A contact with a description of where we met.
  */
 
@@ -14,6 +14,13 @@ public class FriendContact extends Contact {
                          String whereWeMet) {
         super(firstName, lastName, phone, email, address);
         this.whereWeMet = requireText(whereWeMet, "whereWeMet");
+    }
+
+    // OVERLOAD: meeting details may be entered later through the public setter.
+    // this(...) reuses the full constructor and its validation.
+    public FriendContact(String firstName, String lastName,
+                         String phone, String email, Address address) {
+        this(firstName, lastName, phone, email, address, "Not recorded");
     }
 
     public String getWhereWeMet() {

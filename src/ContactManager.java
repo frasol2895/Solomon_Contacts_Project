@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
  * Date: 10/24/2026
- * Assignment: SDC330L 3.8 Course Project - Class Implementation
+ * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
  * Description: Manages contacts and unique IDs in memory for Week 3.
  */
 
@@ -14,6 +14,7 @@ public class ContactManager {
     private final List<Contact> contacts;
     private int nextId;
 
+    // Explicit no-argument constructor creates a valid empty manager.
     public ContactManager() {
         contacts = new ArrayList<>();
         nextId = 1;
