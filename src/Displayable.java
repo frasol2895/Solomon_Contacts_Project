@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
- * Date: 10/24/2026
- * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
+ * Date: 10/31/2026
+ * Assignment: SDC330L 4.6 Course Project - Database Implementation
  * Description: Defines the shared contact display contract.
  */
 

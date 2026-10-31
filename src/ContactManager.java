@@ -1,73 +1,47 @@
 /*
  * Name: Frank Solomon
- * Date: 10/24/2026
- * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
- * Description: Manages contacts and unique IDs in memory for Week 3.
+ * Date: 10/31/2026
+ * Assignment: SDC330L 4.6 Course Project - Database Implementation
+ * Description: Coordinates contact operations using persistent storage instead of a cache.
  */
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class ContactManager {
-    private final List<Contact> contacts;
-    private int nextId;
+    private final ContactRepository repository;
 
-    // Explicit no-argument constructor creates a valid empty manager.
-    public ContactManager() {
-        contacts = new ArrayList<>();
-        nextId = 1;
+    public ContactManager(ContactRepository repository) throws SQLException {
+        this.repository = Objects.requireNonNull(repository, "Repository is required.");
+        repository.initialize();
     }
 
-    public void addContact(Contact contact) {
-        Objects.requireNonNull(contact, "Contact is required.");
-        contact.assignId(nextId);
-        nextId++;
-        contacts.add(contact);
+    public void addContact(Contact contact) throws SQLException {
+        repository.insert(Objects.requireNonNull(contact, "Contact is required."));
     }
 
-    public Contact findById(int id) {
-        for (Contact contact : contacts) {
-            if (contact.getId() == id) {
-                return contact;
-            }
-        }
-        return null;
+    public Contact findById(int id) throws SQLException {
+        return repository.findById(id);
     }
 
-    public List<Contact> findByLastNameInitial(String initial) {
+    public List<Contact> findByLastNameInitial(String initial) throws SQLException {
         if (initial == null || !initial.trim().matches("[A-Za-z]")) {
             throw new IllegalArgumentException("Please enter exactly one letter A-Z.");
         }
-        List<Contact> matches = new ArrayList<>();
-        for (Contact contact : contacts) {
-            if (contact.getLastName().regionMatches(true, 0, initial.trim(), 0, 1)) {
-                matches.add(contact);
-            }
-        }
-        return Collections.unmodifiableList(matches);
+        return Collections.unmodifiableList(repository.findByInitial(initial.trim()));
     }
 
-    // Replacement is validated before it reaches this method; preserve its ID.
-    public boolean updateContact(int id, Contact replacement) {
-        Objects.requireNonNull(replacement, "Contact is required.");
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getId() == id) {
-                replacement.assignId(id);
-                contacts.set(i, replacement);
-                return true;
-            }
-        }
-        return false;
+    public boolean updateContact(int id, Contact replacement) throws SQLException {
+        return repository.update(id, Objects.requireNonNull(replacement, "Contact is required."));
     }
 
-    public boolean removeContact(int id) {
-        return contacts.removeIf(contact -> contact.getId() == id);
+    public boolean removeContact(int id) throws SQLException {
+        return repository.delete(id);
     }
 
-    public List<Contact> getAllContacts() {
-        // Protect list membership; callers use manager operations for CRUD.
-        return Collections.unmodifiableList(new ArrayList<>(contacts));
+    public List<Contact> getAllContacts() throws SQLException {
+        return Collections.unmodifiableList(repository.loadAll());
     }
 }

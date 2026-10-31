@@ -1,16 +1,17 @@
 /*
  * Name: Frank Solomon
- * Date: 10/24/2026
- * Assignment: SDC330L 3.2 Project - Abstraction, Constructors, and Access Specifiers
+ * Date: 10/31/2026
+ * Assignment: SDC330L 4.6 Course Project - Database Implementation
  * Description: Runs the terminal menu and validates contact management input.
  */
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class App {
-    private static final ContactManager manager = new ContactManager();
+    private static ContactManager manager;
 
     // A dedicated signal lets /cancel abandon an unfinished edit safely.
     private static class Cancelled extends RuntimeException {
@@ -18,10 +19,16 @@ public class App {
     }
 
     public static void main(String[] args) {
-        createSampleContacts();
-        System.out.println("Frank Solomon - Week 3 Contacts Application");
-        System.out.println("Project Week 3 - Abstraction, Constructors, and Access Specifiers");
-        System.out.println("Welcome! Three fictional samples are loaded. Changes last only this session.");
+        try {
+            manager = new ContactManager(new ContactRepository("jdbc:sqlite:contacts.db"));
+        } catch (SQLException ex) {
+            System.out.println("Unable to open contacts.db: " + ex.getMessage());
+            System.out.println("Check write permission and run with the included lib JAR files.");
+            return;
+        }
+        System.out.println("Frank Solomon - Week 4 Contacts Application");
+        System.out.println("Database Implementation - SQLite Contact Management");
+        System.out.println("Contacts are saved in contacts.db. A new database starts empty.");
         System.out.println("Enter a menu number. Type /cancel during an operation to cancel.");
         try (Scanner input = new Scanner(System.in)) {
             boolean running = true;
@@ -52,6 +59,8 @@ public class App {
                         default:
                             System.out.println("Invalid selection. Enter 0 through 5.");
                     }
+                } catch (SQLException ex) {
+                    System.out.println("Database operation failed: " + ex.getMessage());
                 } catch (Cancelled ex) {
                     System.out.println("Operation cancelled. No changes saved.");
                 } catch (IllegalArgumentException ex) {
@@ -64,7 +73,6 @@ public class App {
         System.out.println("Thank you for using the Contacts application. Goodbye!");
     }
 
-    // PRIVATE: menu helpers are implementation details used only inside App.
     private static void displayMenu() {
         System.out.println("\n========== MAIN MENU ==========");
         System.out.println("1. Display all contacts");
@@ -163,7 +171,7 @@ public class App {
         }
     }
 
-    private static void updateContact(Scanner input) {
+    private static void updateContact(Scanner input) throws SQLException {
         int id = readId(input);
         Contact current = manager.findById(id);
         if (current == null) {
@@ -172,11 +180,11 @@ public class App {
         }
         System.out.println(current.getContactInformation());
         Contact replacement = readContact(input, current);
-        manager.updateContact(id, replacement);
-        System.out.println("Contact updated.");
+        System.out.println(manager.updateContact(id, replacement)
+                ? "Contact updated." : "Contact ID not found.");
     }
 
-    private static void deleteContact(Scanner input) {
+    private static void deleteContact(Scanner input) throws SQLException {
         int id = readId(input);
         Contact current = manager.findById(id);
         if (current == null) {
@@ -185,46 +193,11 @@ public class App {
         }
         System.out.println(current.getContactInformation());
         if (read(input, "Delete this contact? Enter YES to confirm: ").equalsIgnoreCase("YES")) {
-            manager.removeContact(id);
-            System.out.println("Contact deleted.");
+            System.out.println(manager.removeContact(id)
+                    ? "Contact deleted." : "Contact ID not found.");
         } else {
             System.out.println("Deletion cancelled.");
         }
-    }
-
-    private static void createSampleContacts() {
-        // Fictional sample data for the Week 3 demonstration.
-
-        // COMPOSITION: Each contact contains its own Address object.
-        Address businessAddress =
-                new Address("125 Market Street", "Richmond", "VA", "23220");
-
-        Address familyAddress =
-                new Address("240 Maple Lane", "Chesterfield", "VA", "23832");
-
-        Address friendAddress =
-                new Address(new Address("85 Oak Drive", "Midlothian", "VA", "23113"));
-
-        // INHERITANCE: These three classes extend Contact.
-        BusinessContact business = new BusinessContact(
-                "Jordan", "Carter",
-                "804-555-0101", "jordan.carter@example.com",
-                businessAddress, "River City Technology", "Project Manager");
-
-        FamilyContact family = new FamilyContact(
-                "Morgan", "Davis",
-                "804-555-0102", "morgan.davis@example.com",
-                familyAddress, "Cousin");
-
-        FriendContact friend = new FriendContact(
-                "Taylor", "Bennett",
-                "804-555-0103", "taylor.bennett@example.com",
-                friendAddress);
-        friend.setWhereWeMet("College");
-
-        manager.addContact(business);
-        manager.addContact(family);
-        manager.addContact(friend);
     }
 
 }
