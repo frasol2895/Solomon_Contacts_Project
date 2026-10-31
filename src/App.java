@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
  * Date: 10/31/2026
- * Assignment: SDC330L 4.6 Course Project - Database Implementation
+ * Assignment: 4.2 Project - Week 4 Database Interactions
  * Description: Runs the terminal menu and validates contact management input.
  */
 
@@ -27,8 +27,8 @@ public class App {
             return;
         }
         System.out.println("Frank Solomon - Week 4 Contacts Application");
-        System.out.println("Database Implementation - SQLite Contact Management");
-        System.out.println("Contacts are saved in contacts.db. A new database starts empty.");
+        System.out.println("4.2 Project - Database Interactions");
+        System.out.println("Welcome! Manage business, family, and friend contacts stored in contacts.db.");
         System.out.println("Enter a menu number. Type /cancel during an operation to cancel.");
         try (Scanner input = new Scanner(System.in)) {
             boolean running = true;

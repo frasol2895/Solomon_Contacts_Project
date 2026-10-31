@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
  * Date: 10/31/2026
- * Assignment: SDC330L 4.6 Course Project - Database Implementation
+ * Assignment: 4.2 Project - Week 4 Database Interactions
  * Description: Stores and formats the address owned by a contact.
  */
 

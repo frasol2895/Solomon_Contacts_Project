@@ -1,11 +1,14 @@
 /*
  * Name: Frank Solomon
  * Date: 10/31/2026
- * Assignment: SDC330L 4.6 Course Project - Database Implementation
+ * Assignment: 4.2 Project - Week 4 Database Interactions
  * Description: Abstract parent with shared contact data and display behavior.
  */
 
+// ABSTRACTION: shared contact behavior is defined here; subclasses supply the type.
 public abstract class Contact implements Displayable {
+    // ACCESS SPECIFIERS: private fields are protected from direct outside edits.
+    // Public getters/setters provide controlled access.
     private int id;
     private String firstName;
     private String lastName;
@@ -15,6 +18,7 @@ public abstract class Contact implements Displayable {
     // COMPOSITION: A Contact has an Address object.
     private Address address;
 
+    // CONSTRUCTOR: subclasses call this protected constructor to initialize shared data.
     protected Contact(String firstName, String lastName,
                    String phone, String email, Address address) {
         this.firstName = requireText(firstName, "firstName");
