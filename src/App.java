@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
- * Date: 10/31/2026
- * Assignment: 4.2 Project - Week 4 Database Interactions
+ * Date: 11/07/2026
+ * Project: ContactBook - Final Contacts Application
  * Description: Runs the terminal menu and validates contact management input.
  */
 
@@ -26,9 +26,9 @@ public class App {
             System.out.println("Check write permission and run with the included lib JAR files.");
             return;
         }
-        System.out.println("Frank Solomon - Week 4 Contacts Application");
-        System.out.println("4.2 Project - Database Interactions");
-        System.out.println("Welcome! Manage business, family, and friend contacts stored in contacts.db.");
+        System.out.println("ContactBook | Frank Solomon");
+        System.out.println("Personal and Business Contact Management");
+        System.out.println("Contacts are saved in contacts.db. A new database starts empty.");
         System.out.println("Enter a menu number. Type /cancel during an operation to cancel.");
         try (Scanner input = new Scanner(System.in)) {
             boolean running = true;
@@ -70,7 +70,7 @@ public class App {
         } catch (NoSuchElementException ex) {
             System.out.println("Input closed.");
         }
-        System.out.println("Thank you for using the Contacts application. Goodbye!");
+        System.out.println("Thank you for using ContactBook. Goodbye!");
     }
 
     private static void displayMenu() {

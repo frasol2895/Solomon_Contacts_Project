@@ -1,7 +1,7 @@
 /*
  * Name: Frank Solomon
- * Date: 10/31/2026
- * Assignment: 4.2 Project - Week 4 Database Interactions
+ * Date: 11/07/2026
+ * Project: ContactBook - Final Contacts Application
  * Description: A contact with a family relationship.
  */
 

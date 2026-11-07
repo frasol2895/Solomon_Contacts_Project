@@ -1,0 +1,20 @@
+CONTACTBOOK VERIFICATION
+November 7, 2026
+
+Compiled with the Java 21 compiler module using Java 17 source/target settings.
+Executed real console workflows with an isolated temporary SQLite database.
+
+PASS: add and reload all three contact types.
+PASS: display subtype-specific fields and search by lowercase initial.
+PASS: update a job title while retaining other fields.
+PASS: retain records and updates after restarting the application.
+PASS: cancel an add and decline a delete without changing row counts.
+PASS: confirm deletion and verify it after another restart.
+PASS: reject invalid menu selections, initials, and IDs.
+PASS: handle a missing ID.
+PASS: verify stored changes directly in SQLite.
+
+Windows launcher inspected; not run on Windows.
+Test data and compiled classes are excluded from the package.
+Authenticated course overview and instructor feedback were unavailable.
+Video, GitHub publication, collaborator access, and submission are pending.

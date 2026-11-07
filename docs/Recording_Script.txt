@@ -1,0 +1,70 @@
+CONTACTBOOK — APPROXIMATELY FIVE-MINUTE RECORDING GUIDE
+Frank Solomon
+
+Rehearse once. Timing includes typing, switching files, and demonstrating.
+Use a readable font and keep the terminal and source files ready.
+Use fictional contacts. If you already have records, use the IDs shown by the app.
+
+0:00–0:35 | Introduction — show yourself briefly and the repository README
+"Hello, my name is Frank Solomon. My project is ContactBook, a Java application
+for organizing business, family, and friend contacts. The problem it addresses
+is keeping contact information organized and available after an application
+closes. ContactBook uses a terminal menu and saves records in SQLite.
+I'll demonstrate the main features, then explain how the code is organized."
+
+0:35–1:25 | Run the application and add a contact
+"Here is the main menu. I can display, search, add, update, or delete contacts.
+I'll add a business contact. Each contact has a name, phone number, email,
+and address. Business contacts also have a company and job title."
+Choose 3, then 1, and enter:
+Alex / Morgan / 804-555-0100 / alex@example.com / 100 Example Lane /
+Henrico / VA / 23228 / Example Company / Coordinator
+Choose 1 and point out the assigned ID.
+"The database assigns an ID so each record can be selected reliably."
+
+1:25–2:15 | Search and update
+Choose 2 and enter M.
+"Search accepts a last-name initial. Here it returns Morgan."
+Choose 4 and enter the displayed ID. Press Enter to retain fields and change
+the job title to Manager. Choose 1 to show the changed record.
+"During an update, Enter keeps a current value. The program builds a replacement
+object and saves the changes after the prompts are complete. Typing slash-cancel
+abandons an unfinished operation."
+Optionally enter an invalid menu selection to show the helpful message.
+
+2:15–2:50 | Persistence and deletion
+Choose 0, rerun the launcher, and choose 1.
+"The updated contact is still here after restarting because the record is stored
+in contacts.db, rather than existing only in memory."
+Choose 5, enter its ID, and enter NO.
+"Deletion asks for confirmation."
+Repeat and enter YES, then list again.
+"The record has now been removed from SQLite."
+
+2:50–3:45 | Object-oriented code — show Contact.java and BusinessContact.java
+"Contact is abstract. It stores the fields shared by every contact and declares
+getContactType. BusinessContact, FamilyContact, and FriendContact extend this
+class and implement their own type and display details.
+The constructors initialize the required fields and call the parent constructor.
+Private fields protect the object's data, public methods provide access, and
+protected validation is available to subclasses."
+Show Address.java and App.showContacts.
+"A contact contains an Address object, which demonstrates composition.
+The menu loops through Displayable references. Each object's overridden method
+provides the correct details at runtime, demonstrating polymorphism."
+
+3:45–4:35 | Database code — show ContactManager and ContactRepository
+"ContactManager coordinates the operations, and ContactRepository handles SQL.
+The repository creates the contacts table if needed. It uses INSERT to add,
+SELECT to read, UPDATE to edit, and DELETE to remove records.
+Prepared statements pass user values separately from SQL instructions.
+When records are loaded, the stored contact type determines which Java subclass
+to construct. Try-with-resources closes database connections, statements,
+and result sets after each operation."
+
+4:35–5:00 | README and conclusion
+"The README explains how to run the project, maps the requirements to the
+implementation, and ends with the project summary. ContactBook demonstrates
+object-oriented design and persistent storage through a complete contact
+management workflow. Future improvements could include full-name searches
+and a graphical interface. Thank you for viewing my project."

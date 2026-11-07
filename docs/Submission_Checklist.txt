@@ -1,0 +1,39 @@
+CONTACTBOOK — FINAL SUBMISSION CHECKLIST
+Frank Solomon | November 7, 2026
+
+1. Extract ContactBook and run run.bat on Windows. Verify that adding, listing,
+   searching, updating, deleting, and restarting work on your computer.
+2. Compare the project with the Week 5 Course Project Overview and any
+   instructor feedback. The authenticated overview, summary examples, and
+   tagging handout were not available during preparation. This package was
+   checked against the pasted final instructions and rubric.
+3. Record approximately five minutes using Recording_Script.txt. Be presentable
+   and professional; include a brief on-camera introduction and screen demonstration.
+4. Upload the video to YouTube. Choose visibility that permits instructor access,
+   and verify the link works when signed out.
+5. Replace the placeholder URL in root-level VIDEO_LINK.md with the actual URL.
+6. Name your GitHub project ContactBook (no course name or course number).
+   Keep the README.md, VIDEO_LINK.md, src, lib, docs, and launchers at the
+   repository root. Upload extracted files, not just this ZIP.
+   If updating an existing repository, preserve its history and replace the
+   matching project files. Do not upload contacts.db or bin.
+7. Commit the final code and completed video link.
+8. Add your instructor as a repository collaborator using their exact GitHub
+   username or email. Confirm the instructor can access the repository.
+9. Create a release from the final commit:
+   - Suggested valid Git tag: Phase-3
+   - Release title: Phase #3
+   The assignment literally says tag "Phase #3", but Git tags cannot contain
+   spaces. Phase-3 is a technical workaround, not a confirmed instructor naming
+   preference. Check the course tagging handout for its intended convention.
+10. Submit the URL of the final tagged project/release in the Website URL field
+    under your own GitHub account. Verify that it shows the final files and
+    completed video link.
+
+Git reference naming:
+https://git-scm.com/docs/git-check-ref-format
+GitHub release instructions:
+https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
+
+The video, collaborator invitation, GitHub upload, tag, and course submission
+have NOT been completed by this package.
